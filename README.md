@@ -26,10 +26,14 @@ addpath(genpath('src'))     % adds src and all sub-packages (incl. @iodata)
 ### Required toolboxes
 * MATLAB
 * Control System Toolbox
-* Signal Processing Toolbox
 ### Optional
 * System Identification Toolbox — only for `iodata.toIddata` / `iodata.fromIddata`
   (everything else runs without it)
+* Signal Processing Toolbox — only for the legacy windowed estimators
+  (`time2frf_h1`, `time2frf_log`, which use `hanning`/`bartlett`) and the
+  `tfestimate` comparison in `Tutorial_1`. The main pipeline (multisine →
+  `time2frf_ml`/`time2frf_lpm` → parametric estimation → validation) runs
+  without it; `residtest` uses an FFT-based autocorrelation instead of `xcorr`.
 
 # Overview
 
@@ -59,7 +63,6 @@ addpath(genpath('src'))     % adds src and all sub-packages (incl. @iodata)
 ## ParametricEstimation
 * Deterministic: least squares, weighted LS, nonlinear LS (`lsfdi`, `wlsfdi`, `nlsfdi`)
 * Stochastic: maximum likelihood, bootstrapped/generalized TLS (`mlfdi`, `btlsfdi`, `gtlsfdi`)
-* Subspace: `ssfdi`
 
 ## SelectionValidation
 Three complementary tests (`residtest`, `costtest`, `chi2test`):
