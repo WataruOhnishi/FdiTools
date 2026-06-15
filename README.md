@@ -4,7 +4,7 @@ FdiTools
 Frequency Domain System Identification MATLAB Toolbox.
 
 > **v3.0** — the continued, major-upgraded version of
-> [HoriFujimotoLab/FdiTools](https://github.com/HoriFujimotoLab/FdiTools) (v1–v2.1).
+> [HoriFujimotoLab/FdiTools](https://github.com/HoriFujimotoLab/FdiTools) (v1–v2.1.1).
 > The original repository remains available there; this version adds the
 > `iodata` container, the Local Polynomial Method, and MIMO FRF/LPM/BLA.
 > See **What's new in 3.0** below.
