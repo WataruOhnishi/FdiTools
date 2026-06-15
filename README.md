@@ -30,11 +30,6 @@ addpath(genpath('src'))     % adds src and all sub-packages (incl. @iodata)
 ### Optional
 * System Identification Toolbox — only for `iodata.toIddata` / `iodata.fromIddata`
   (everything else runs without it)
-### Not required
-* Statistics and Machine Learning Toolbox — **not needed**. The confidence-bound
-  radius (`frfconf`, PS2012 eq. 2-40) is the F-distribution quantile
-  `sqrt(F_p(2,2M-2))`; because the numerator d.o.f. is 2 it has the closed form
-  `sqrt((M-1)((1-p)^(-1/(M-1))-1))`, so it is evaluated exactly without `finv`.
 
 # Overview
 
