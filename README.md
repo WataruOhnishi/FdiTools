@@ -59,7 +59,6 @@ addpath(genpath('src'))     % adds src and all sub-packages (incl. @iodata)
 ## ParametricEstimation
 * Deterministic: least squares, weighted LS, nonlinear LS (`lsfdi`, `wlsfdi`, `nlsfdi`)
 * Stochastic: maximum likelihood, bootstrapped/generalized TLS (`mlfdi`, `btlsfdi`, `gtlsfdi`)
-* Subspace: `ssfdi`
 
 ## SelectionValidation
 Three complementary tests (`residtest`, `costtest`, `chi2test`):
