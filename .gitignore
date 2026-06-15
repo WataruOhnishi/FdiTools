@@ -1,7 +1,6 @@
 ### FdiTools Specific
 *.pdf
 *.emf
-README.html
 
 ### Matlab
 *.asv
@@ -45,4 +44,3 @@ Debug/
 *.msp
 *.lnk
 ._*
-*.slxc

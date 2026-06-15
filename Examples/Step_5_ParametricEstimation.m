@@ -10,16 +10,20 @@
 clear all; close all; clc;
 load('private/MultisineTypeA.mat');     % schoeder multisine experiment
 
-% Time treatment: remove transients/offsets/trends
+% Time treatment: build an iodata container, then remove
+% transients/offsets/trends (TypeA carries the multisine ms).
 trans = 1;                      % number of transient periods
 trend = 0;                      % period trend removal flag
-input = [iq_adx];               % input data to motor bench
+input  = [iq_adx];              % input data to motor bench
 output = [theta_mx,-theta_my];  % output data of motor bench
-[x,time] = pretreat(input,ms.nrofs,ms.harm.fs,trans,trend);
-[y,time] = pretreat(output,ms.nrofs,ms.harm.fs,trans,trend);
+
+dat = iodata(output, input, 1/ms.harm.fs, 'Period', ms.nrofs, 'UserData', struct('ms', ms));
+dat.InputName  = {'iq'};
+dat.OutputName = {'theta_m','theta_l'};
+dat = pretreat(dat, 'trans', trans, 'trend', trend);
 
 % Non-parametric estimation of frf matrix data
-Pest = time2frf_ml(x,y,ms);
+Pest = time2frf_ml(dat);
 
 %% STEP 4: PARAMETRIC ESTIMATION
 % deterministric/stochastic estimation with non-parametric noise model
@@ -52,7 +56,7 @@ subplot(221), semilogx(freq,[dbm(squeeze(Pest.resp(1,1,:))),dbm(FRF.wls(:,1)),db
 hold on, semilogx(freq,dbm(FRF.ls(:,1)),'k--')    % starting values
 hold on, semilogx(freq,dbm(Pest.UserData.FRFn(:,1)),'m--')      % uncertainty level
     ylabel('Amplitude [dB]') 
-    legend('FRF','WLS','NLS','LS','FRFn')
+    legend('FRF','WLS','NLS','LS','FRFn','Location','best');
     xlim([10,300])
 subplot(223), semilogx(freq,[phs(squeeze(Pest.resp(1,1,:))),phs(FRF.wls(:,1)),phs(FRF.nls(:,1))])
 hold on, semilogx(freq,phs(FRF.ls(:,1)),'k--')    % starting values
@@ -63,7 +67,7 @@ subplot(222), semilogx(freq,[dbm(squeeze(Pest.resp(2,1,:))),dbm(FRF.wls(:,2)),db
 hold on, semilogx(freq,dbm(FRF.ls(:,2)),'k--')    % starting values
 hold on, semilogx(freq,dbm(Pest.UserData.FRFn(:,2)),'m--')      % uncertainty level
     ylabel('Amplitude [dB]') 
-    legend('FRF','WLS','NLS','LS','FRFn')
+    legend('FRF','WLS','NLS','LS','FRFn','Location','best');
     xlim([10,300])
 subplot(224), semilogx(freq,[phs(squeeze(Pest.resp(2,1,:))),phs(FRF.wls(:,2)),phs(FRF.nls(:,2))])
 hold on, semilogx(freq,phs(FRF.ls(:,2)),'k--')    % starting values
@@ -74,9 +78,9 @@ hold on, semilogx(freq,phs(FRF.ls(:,2)),'k--')    % starting values
 figure('Name','Stochastic Estimators')
 subplot(221), semilogx(freq,[dbm(squeeze(Pest.resp(1,1,:))),dbm(FRF.ml(:,1)),dbm(FRF.btls(:,1))])
 hold on, semilogx(freq,dbm(FRF.gtls(:,1)),'k--')  % starting values
-hold on, semilogx(freq,dbm(Pest.UserData.sGhat(:,1)),'m--')       % uncertainty lowerbound
+hold on, semilogx(freq,dbm(Pest.UserData.sG(:,1)),'m--')       % uncertainty lowerbound
     ylabel('Amplitude [dB]')
-    legend('FRF','MLE','BTLS','GTLS','sGhat')
+    legend('FRF','MLE','BTLS','GTLS','sG','Location','best');
     xlim([10,300])
 subplot(223), semilogx(freq,[phs(squeeze(Pest.resp(1,1,:))),phs(FRF.ml(:,1)),phs(FRF.btls(:,1))])
 hold on, semilogx(freq,phs(FRF.gtls(:,1)),'k--')  % starting values
@@ -85,9 +89,9 @@ hold on, semilogx(freq,phs(FRF.gtls(:,1)),'k--')  % starting values
     xlim([10,300])    
 subplot(222), semilogx(freq,[dbm(squeeze(Pest.resp(2,1,:))),dbm(FRF.ml(:,2)),dbm(FRF.btls(:,2))])
 hold on, semilogx(freq,dbm(FRF.gtls(:,2)),'k--')  % starting values
-hold on, semilogx(freq,dbm(Pest.UserData.sGhat(:,2)),'m--')       % uncertainty lowerbound
+hold on, semilogx(freq,dbm(Pest.UserData.sG(:,2)),'m--')       % uncertainty lowerbound
     ylabel('Amplitude [dB]')
-    legend('FRF','MLE','BTLS','GTLS','sGhat')
+    legend('FRF','MLE','BTLS','GTLS','sG','Location','best');
     xlim([10,300])
 subplot(224), semilogx(freq,[phs(squeeze(Pest.resp(2,1,:))),phs(FRF.ml(:,2)),phs(FRF.btls(:,2))])
 hold on, semilogx(freq,phs(FRF.gtls(:,2)),'k--')  % starting values

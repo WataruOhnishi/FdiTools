@@ -23,13 +23,19 @@ load('private/MultisineTypeB.mat');     % random odd-odd multisine experiment
 % ms = multisine(harm, Hampl, options);
 
 
-% Time treatment: remove transients/offsets/trends
+% Time treatment: build an iodata container, then remove
+% transients/offsets/trends. (TypeB stores loose fs/nrofs/fl/fh/df, no ms,
+% so the data is built with the plain constructor.)
 trans = 1;                      % number of transient periods
 trend = 0;                      % period trend removal flag
-input = [iq_adx];               % input data to motor bench
+input  = [iq_adx];              % input data to motor bench
 output = [theta_mx,-theta_my];  % output data of motor bench
-[x,time] = pretreat(input,nrofs,fs,trans,trend);
-[y,time] = pretreat(output,nrofs,fs,trans,trend);
+
+dat = iodata(output, input, 1/fs, 'Period', nrofs);
+dat.InputName  = {'iq'};
+dat.OutputName = {'theta_m','theta_l'};
+dat = pretreat(dat, 'trans', trans, 'trend', trend);
+x = dat.InputData; y = dat.OutputData;
 
 %% STEP 3: NON-LINEARITY DETECTION
 % quantify non-linear distortion level in data
@@ -43,7 +49,7 @@ subplot(212), semilogx(freql,dbm(Yl(:,2)),freqe,dbm(Ye(:,2)),...
                        freqo,dbm(Yo(:,2)),freqn,dbm(Yn(:,2)));
     ylabel('Magnitude [dB]'), xlim([fl,fh])
     xlabel('Frequency [Hz]');
-    legend('Ylin','Yeven','Yodd','Ynoise')
+    legend('Ylin','Yeven','Yodd','Ynoise','Location','best');
     
 % NOTE: important low-frequent odd-distortions present in data
 %       probably due to non-linear rolling friction in the bearings 
