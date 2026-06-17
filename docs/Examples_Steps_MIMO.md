@@ -1,5 +1,7 @@
 # FdiTools 3.0 — MIMO Step examples
 
+> 🇯🇵 日本語版: [Examples_Steps_MIMO_JP.md](Examples_Steps_MIMO_JP.md)
+
 Result gallery for the multi-input workflow (`Examples/Step_MIMO1` … `Step_MIMO6`),
 on the shared 2×2 rank-one modal benchmark `mimobench` (modes ≈ 40 / 95 / 180 Hz).
 See also [SISO Steps](Examples_Steps_SISO.md),

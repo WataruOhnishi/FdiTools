@@ -1,38 +1,35 @@
-# FdiTools 3.0 — SISO Tutorials
+> 🇬🇧 English: [Examples_Tutorials_SISO.md](Examples_Tutorials_SISO.md)
 
-> 🇯🇵 日本語版: [Examples_Tutorials_SISO_JP.md](Examples_Tutorials_SISO_JP.md)
+# FdiTools 3.0 — SISO チュートリアル
 
-Result gallery for the single-input tutorials. See also
-[SISO Steps](Examples_Steps_SISO.md), [MIMO Steps](Examples_Steps_MIMO.md),
-[MIMO Tutorial](Examples_Tutorials_MIMO.md).
+単入力チュートリアルの結果ギャラリーです。あわせて
+[SISO ステップ](Examples_Steps_SISO_JP.md)、[MIMO ステップ](Examples_Steps_MIMO_JP.md)、
+[MIMO チュートリアル](Examples_Tutorials_MIMO_JP.md) も参照してください。
 
 ---
 
-## Tutorial 1 — chirp (swept-sine) excitation
-Swept-sine time/frequency signal, coherence, and the estimated FRF vs the true
-plant.
+## チュートリアル 1 — チャープ（スイープ正弦）励振
+スイープ正弦の時間／周波数信号、コヒーレンス、および推定された FRF（周波数応答関数）と真のプラントの比較。
 
 ![swept-sine time & frequency](../Examples/plot/Tutorial_1_chirp_01.png)
 ![coherence](../Examples/plot/Tutorial_1_chirp_02.png)
 ![FRF vs true](../Examples/plot/Tutorial_1_chirp_03.png)
 
-## Tutorial 1 — random excitation
-Non-periodic random excitation: coherence (good in-band, drops at the
-anti-resonance and out of band) and the estimated FRF.
+## チュートリアル 1 — ランダム励振
+非周期ランダム励振：コヒーレンス（帯域内では良好で、反共振点および帯域外で低下する）と推定された FRF（周波数応答関数）。
 
 ![coherence](../Examples/plot/Tutorial_1_random_01.png)
 ![FRF vs true](../Examples/plot/Tutorial_1_random_02.png)
 
-## Tutorial 1 — quasi-logarithmic multisine
-Quasi-log grid multisine, the time-domain input/output, FRF with noise model,
-the 95% confidence band, and the parametric estimators.
+## チュートリアル 1 — 準対数マルチサイン
+準対数グリッドのマルチサイン、時間領域の入出力、ノイズモデル付きの FRF（周波数応答関数）、95% 信頼区間バンド、およびパラメトリック推定量。
 
 ![multisine crest factors](../Examples/plot/Tutorial_1_qlog_01.png)
 ![excited-line spectra](../Examples/plot/Tutorial_1_qlog_02.png)
 ![input / output time data](../Examples/plot/Tutorial_1_qlog_03.png)
 ![FRF with noise model](../Examples/plot/Tutorial_1_qlog_04.png)
 ![FRF with 95% confidence band](../Examples/plot/Tutorial_1_qlog_05.png)
-*The 95% band widens at high frequency where the SNR drops.*
+*SNR が低下する高周波域で 95% バンドが広がる。*
 
 ![deterministic estimators](../Examples/plot/Tutorial_1_qlog_06.png)
 ![stochastic estimators](../Examples/plot/Tutorial_1_qlog_07.png)
@@ -40,13 +37,10 @@ the 95% confidence band, and the parametric estimators.
 
 ---
 
-## Tutorial 2 — iterative experiment design (inverse S/N)
-Three experiments — wideband, then refined via the inverse signal-to-noise
-ratio, then concentrated at high frequency — are merged (`fcat_fdi`) into one
-low-uncertainty FRF. The crest-factor optimiser converges to CF ≈ 1.69 / 1.95 /
-2.22 for the three designs.
+## チュートリアル 2 — 反復実験計画（逆 S/N）
+3 つの実験 — 広帯域、続いて逆信号雑音比により精密化、さらに高周波域に集中 — を 1 つの低不確かさ FRF（周波数応答関数）へ統合する（`fcat_fdi`）。クレストファクタ最適化器は 3 つの設計に対して CF ≈ 1.69 / 1.95 / 2.22 に収束する。
 
-Excitation designs and per-band FRFs for the three experiments:
+3 つの実験における励振設計と帯域別 FRF：
 
 ![exp 1 crest factors](../Examples/plot/Tutorial_2_iterative_01.png)
 ![exp 1 spectra](../Examples/plot/Tutorial_2_iterative_02.png)
@@ -61,25 +55,23 @@ Excitation designs and per-band FRFs for the three experiments:
 ![exp 3 time data](../Examples/plot/Tutorial_2_iterative_11.png)
 ![exp 3 FRF](../Examples/plot/Tutorial_2_iterative_12.png)
 
-Single vs iterative experiment, and the resulting estimation error:
+単一実験と反復実験の比較、および結果として得られる推定誤差：
 
 ![single experiment FRF](../Examples/plot/Tutorial_2_iterative_13.png)
 ![estimation error: single vs iterative](../Examples/plot/Tutorial_2_iterative_14.png)
-*Key result: the iterative design lowers the estimation error in the targeted
-high-frequency range.*
+*重要な結果：反復設計により、対象とした高周波域での推定誤差が低減する。*
 
-Parametric estimation on the merged FRF:
+統合された FRF（周波数応答関数）に対するパラメトリック推定：
 
 ![deterministic estimators](../Examples/plot/Tutorial_2_iterative_15.png)
 ![stochastic estimators](../Examples/plot/Tutorial_2_iterative_16.png)
 ![best estimator](../Examples/plot/Tutorial_2_iterative_17.png)
-*(GTLS is a rough starting-value estimator and can degenerate; MLE/BTLS are the
-reliable ones.)*
+*（GTLS は粗い初期値推定量であり退化しうる。MLE/BTLS が信頼できるものである。）*
 
 ---
 
-## Tutorial 3 — nonlinear distortions, input nonlinearity
-Distortion analysis at increasing input amplitudes (and a linear reference).
+## チュートリアル 3 — 非線形ひずみ、入力非線形性
+入力振幅を増加させた場合（および線形参照）のひずみ解析。
 
 ![multisine crest factors](../Examples/plot/Tutorial_3_nonlinear_in_01.png)
 ![excited-line spectra](../Examples/plot/Tutorial_3_nonlinear_in_02.png)
@@ -88,8 +80,8 @@ Distortion analysis at increasing input amplitudes (and a linear reference).
 ![noise + NL, input amp 10](../Examples/plot/Tutorial_3_nonlinear_in_05.png)
 ![without noise and nl](../Examples/plot/Tutorial_3_nonlinear_in_06.png)
 
-## Tutorial 3 — nonlinear distortions, output nonlinearity
-Same sweep for an output (Wiener-type) nonlinearity.
+## チュートリアル 3 — 非線形ひずみ、出力非線形性
+出力（Wiener 型）非線形性に対する同じスイープ。
 
 ![multisine crest factors](../Examples/plot/Tutorial_3_nonlinear_out_01.png)
 ![excited-line spectra](../Examples/plot/Tutorial_3_nonlinear_out_02.png)

@@ -1,6 +1,8 @@
 FdiTools
 ========
 
+> 🇯🇵 日本語版: [README_JP.md](README_JP.md)
+
 Frequency Domain System Identification MATLAB Toolbox.
 
 > **v3.0** — the continued, major-upgraded version of

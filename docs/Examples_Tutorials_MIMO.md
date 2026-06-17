@@ -1,5 +1,7 @@
 # FdiTools 3.0 — MIMO Tutorial
 
+> 🇯🇵 日本語版: [Examples_Tutorials_MIMO_JP.md](Examples_Tutorials_MIMO_JP.md)
+
 Result gallery for `Examples/Tutorial_4_MIMO`. This tutorial walks the **full
 multivariable workflow on a single 2×2 plant**: design the excitation, measure
 the FRF two different ways, and fit a structured modal model — using the same

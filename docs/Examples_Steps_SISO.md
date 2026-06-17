@@ -1,5 +1,7 @@
 # FdiTools 3.0 — SISO/SIMO Step examples
 
+> 🇯🇵 日本語版: [Examples_Steps_SISO_JP.md](Examples_Steps_SISO_JP.md)
+
 Result gallery for the single-input workflow (`Examples/Step_1` … `Step_6`).
 Run an example, then `savefigs('<name>')` (or `export_all_figs`) to regenerate the
 images in `Examples/plot/`. See also [MIMO Steps](Examples_Steps_MIMO.md),
