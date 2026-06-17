@@ -23,7 +23,9 @@ function h = bode_fdi(sys, varargin)
 %             (A numeric value may also be given positionally as the 2nd arg.)
 %   'sigma' : multiplier applied to the uncertainty magnitude (default 1)
 %   'style' : 'line' (overlay 20log10(sigma*unc), default) or
-%             'band' (shade |G_ref| +/- sigma*unc around the owning system)
+%             'band' (shade the complex confidence disk of radius r=sigma*unc
+%             around the owning system: |G_ref| +/- r on magnitude AND
+%             +/- asin(r/|G_ref|) on phase, full phase when r >= |G_ref|)
 %   'col'   : column of a multi-output UserData field to use (default 1)
 %   'legend': cellstr of names; an (N+1)-th entry names the uncertainty curve
 %   'unit'  : frequency-axis unit string for the label (default 'Hz')
@@ -120,12 +122,25 @@ if ~isempty(um)
                 plot(axM, uf, 20*log10(um), '--', 'DisplayName', uname);
             else
                 [rf, rresp] = local_response(refsys, uf');
-                gmag = interp1(rf, abs(rresp), uf, 'linear', 'extrap');
+                gre  = interp1(rf, real(rresp), uf, 'linear', 'extrap');
+                gim  = interp1(rf, imag(rresp), uf, 'linear', 'extrap');
+                gmag = hypot(gre, gim);
+                % magnitude band: |G| +/- r
                 up = 20*log10(gmag + um);
                 lo = 20*log10(max(gmag - um, eps));
                 hb = fill(axM, [uf; flipud(uf)], [up; flipud(lo)], [0.6 0.6 0.6], ...
                     'EdgeColor','none','FaceAlpha',0.25, 'DisplayName', uname);
                 if ~uncNamed, set(hb,'HandleVisibility','off'); end
+                % phase band: the same complex confidence disk (radius r=um)
+                % seen from the origin spans +/- asin(r/|G|); it covers every
+                % phase once the disk reaches the origin (r >= |G|).
+                gph = rad2deg(angle(gre + 1i*gim));
+                php = asind(min(um ./ max(gmag, eps), 1));
+                php(um >= gmag) = 180;
+                upP = min(gph + php, pmax);
+                loP = max(gph - php, pmin);
+                fill(axP, [uf; flipud(uf)], [upP; flipud(loP)], [0.6 0.6 0.6], ...
+                    'EdgeColor','none','FaceAlpha',0.25, 'HandleVisibility','off');
             end
         otherwise
             error('bode_fdi:style','''style'' must be ''line'' or ''band''.');
