@@ -1,5 +1,5 @@
 % Frequency Domain Identification Toolbox
-% Version 3.0  15-Jun-2026
+% Version 3.0.1  18-Jun-2026
 %
 % Data Structure
 %   iodata         - iddata-compatible time-domain data container.

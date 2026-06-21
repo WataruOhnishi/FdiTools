@@ -10,6 +10,7 @@ FdiTools
 > オリジナルのリポジトリはそちらで引き続き公開されています。本版では
 > `iodata` コンテナ、局所多項式法 (LPM)、および MIMO の FRF/LPM/BLA を追加しています。
 > 下記の **3.0 の新機能** を参照してください。
+> v2.x からの移行は [移行ガイド](CHANGELOG.md) を参照してください。
 
 主要参考文献:<br>
 - R. Pintelon and J. Schoukens, *System Identification: A Frequency Domain Approach*, 2nd ed., Wiley-IEEE Press, 2012.

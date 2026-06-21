@@ -148,6 +148,7 @@ if length(varargin) < 5 % structured i/o
     Pest.UserData.cXY = cXY;
     Pest.UserData.sCR = sCR;
     Pest.UserData.sG = sG;       % FRF standard deviation, PS2012 eq.(2-38)
+    Pest.UserData.sGhat = sG;    % deprecated alias of sG (v2.1.1 backward compat)
     Pest.UserData.nrofp = nrofp;
     Pest.UserData.ms = ms;
     

@@ -10,6 +10,7 @@ Frequency Domain System Identification MATLAB Toolbox.
 > The original repository remains available there; this version adds the
 > `iodata` container, the Local Polynomial Method, and MIMO FRF/LPM/BLA.
 > See **What's new in 3.0** below.
+> Upgrading from v2.x? See the [migration guide](CHANGELOG.md).
 
 Main references:<br>
 - R. Pintelon and J. Schoukens, *System Identification: A Frequency Domain Approach*, 2nd ed., Wiley-IEEE Press, 2012.

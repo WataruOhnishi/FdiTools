@@ -45,6 +45,19 @@ unc = []; sigma = 1; style = 'line'; legNames = {}; unit = 'Hz';
 xl = []; ttl = ''; pmin = -180; pmax = 180; col = 1; maglim = [];
 legLoc = 'best';                         % legend location ('best','northeastoutside',...)
 args = varargin;
+% --- backward compatibility (v2.1.1): bode_fdi(data, noise, optionStruct) ----
+% The old API passed a struct of plot options (pmin/pmax/title) as a trailing
+% argument. Translate it to the current name-value options.
+isStructArg = cellfun(@isstruct, args);
+if any(isStructArg)
+    o = args{find(isStructArg,1)};  args = args(~isStructArg);
+    warning('FdiTools:deprecated', ...
+        ['bode_fdi(data,noise,option) is deprecated; use name-value options, ', ...
+         'e.g. bode_fdi(sys,''unc'',src,''pmin'',-180,''pmax'',180,''title'',str).']);
+    if isfield(o,'pmin'),  args = [args, {'pmin',  o.pmin}];  end
+    if isfield(o,'pmax'),  args = [args, {'pmax',  o.pmax}];  end
+    if isfield(o,'title'), args = [args, {'title', o.title}]; end
+end
 if ~isempty(args) && ~(ischar(args{1}) || isstring(args{1}))
     unc = args{1}; args(1) = [];        % positional uncertainty
 end

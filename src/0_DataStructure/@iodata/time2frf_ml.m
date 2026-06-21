@@ -110,6 +110,7 @@ Pest = frd(G, freq, 'FrequencyUnit', 'Hz');
 Pest.UserData.ms     = ms;
 Pest.UserData.method = method;
 Pest.UserData.sG     = sG;          % FRF standard deviation (ny x nu x nl)
+Pest.UserData.sGhat  = sG;          % deprecated alias of sG (v2.1.1 backward compat)
 Pest.UserData.nrofp  = M;           % periods per experiment (for FRFCONF)
 end
 

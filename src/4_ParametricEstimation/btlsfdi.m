@@ -1,10 +1,10 @@
 function [Hbtls,Hgtls] = btlsfdi(varargin)
 %BTLSFDI - Bootstrapped Total Least Squares Estimation (MIMO).
 % structured input
-%   [Hbtls,Hgtls] = btlsfdi(Pest,n,mh,ml,iter,relax,max_err)
+%   [Hbtls,Hgtls] = btlsfdi(Pest,n,mh,ml,relax,max_iter,max_err,cORd)
 % Pest        : Estimated model structure (frd) obtained by time2frf_ml.m
 % FdiTools classical input
-%   [Hbtls,Hgtls] = btlsfdi(X,Y,freq,n,mh,ml,sY2,sX2,cXY,iter,relax,max_err,fs)
+%   [Hbtls,Hgtls] = btlsfdi(X,Y,freq,n,mh,ml,sY2,sX2,cXY,relax,max_iter,max_err,cORd,fs)
 % X,Y,freq    : Input & output frequency domain data
 % sX2,sY2     : variance of X & Y frequency domain data
 % cXY         : Covariance between X & Y frequency domain data
